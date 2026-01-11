@@ -9,7 +9,7 @@ interface PredictionResult {
 
 async function fetchData(home_team: string, away_team: string) {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/predict/${home_team}/${away_team}?Odds_1=2.00&Odds_X=3.00&Odds_2=2.00`);
+    const response = await fetch(`https://football-predictor-backend-6j8a.onrender.com/predict/${home_team}/${away_team}?Odds_1=2.00&Odds_X=3.00&Odds_2=2.00`);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
