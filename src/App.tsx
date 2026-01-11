@@ -53,28 +53,31 @@ function App() {
             />
           </label>
         </div>
-        <h2>Matchup: {homeTeam} vs {awayTeam}</h2>
         <button onClick={async () => {
           const result = await fetchData(homeTeam, awayTeam)
           setRestult(result)
         }}>Submit</button>
-        <div id="result">
-          <div>
-            {result?.message}
+        {
+          result && <div>
+            <div id="result">
+              <h2>
+                {result?.message}
+              </h2>
+              <div>
+                Home win Proba: {result?.probabilities[2]}
+              </div>
+              <div>
+                Draw Proba: {result?.probabilities[1]}
+              </div>
+              <div>
+                Away win Proba: {result?.probabilities[0]}
+              </div>
+            </div>
+            <h1>
+              Result: {result?.prediction}
+            </h1>
           </div>
-          <div>
-            Home win Proba: {result?.probabilities[2]}
-          </div>
-          <div>
-            Draw Proba: {result?.probabilities[1]}
-          </div>
-          <div>
-            Away win Proba: {result?.probabilities[0]}
-          </div>
-        </div>
-        <div>
-          Winner: {result?.prediction}
-        </div>
+        }
       </div>
     </>
   )
