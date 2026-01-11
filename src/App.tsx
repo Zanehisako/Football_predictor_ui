@@ -32,7 +32,7 @@ function App() {
   return (
     <>
       <div className="App">
-        <h1>Soccer Matchup</h1>
+        <h1>Football Matchup Predictor</h1>
         <div>
           <label>
             Home Team:
