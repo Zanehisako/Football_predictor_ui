@@ -31,7 +31,7 @@ function App() {
 
   return (
     <>
-      <div className="App">
+      <div className="flex flex-col items-center justify-center ">
         <h1>Football Matchup Predictor</h1>
         <div>
           <label>
@@ -43,7 +43,7 @@ function App() {
             />
           </label>
         </div>
-        <div>
+        <div >
           <label>
             Away Team:
             <input
