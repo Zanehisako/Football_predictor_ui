@@ -77,13 +77,13 @@ function App() {
                   {result?.message}
                 </h2>
                 <div>
-                  Home win Proba: {result?.probabilities[2]}
+                  Home win Proba: {(result?.probabilities[2] * 100).toFixed(2)}%
                 </div>
                 <div>
-                  Draw Proba: {result?.probabilities[1]}
+                  Draw Proba: {(result?.probabilities[1] * 100).toFixed(2)}%
                 </div>
                 <div>
-                  Away win Proba: {result?.probabilities[0]}
+                  Away win Proba: {(result?.probabilities[0] * 100).toFixed(2)}%
                 </div>
               </div>
               <h1>
