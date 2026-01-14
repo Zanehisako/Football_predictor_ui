@@ -7,6 +7,7 @@ interface searchResult {
 }
 interface TeamSearchProps {
     type?: string,
+    teams: string[]
     setSelectedTeam: (team: string) => void
 }
 export default function TeamSearch(props: TeamSearchProps) {
@@ -16,18 +17,7 @@ export default function TeamSearch(props: TeamSearchProps) {
         includeScore: true
     }
 
-    const list = [
-        "Arsenal",
-        "Aston Villa",
-        "Bournemouth",
-        "Brentford",
-        "Brighton",
-        "Chelsea",
-        "Crystal Palace",
-        "Everton",
-        "Fulham",
-        "Leeds United",]
-    const fuse = new Fuse(list, options)
+    const fuse = new Fuse(props.teams, options)
 
     return (
         <div>
@@ -38,7 +28,7 @@ export default function TeamSearch(props: TeamSearchProps) {
                 onChange={(e) => {
                     setTeam(e.target.value)
                     const results = fuse.search(e.target.value) as searchResult[]
-                    console.log(results)
+                    // console.log(results)
                     setResults(results)
                 }
                 }

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import TeamSearch from './componets/team_search';
 
@@ -8,9 +8,29 @@ interface PredictionResult {
   prediction?: string;
 }
 
+
+async function fetchTeams() {
+  try {
+    const response = await fetch(`http://127.0.0.1:8000/teams`);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json(); // or .text(), .blob()
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error('Fetch error:', error);
+  }
+
+}
+
+
 async function fetchData(home_team: string, away_team: string) {
   try {
-    const response = await fetch(`https://football-predictor-backend-6j8a.onrender.com/predict/${home_team}/${away_team}`);
+    // const response = await fetch(`https://football-predictor-backend-6j8a.onrender.com/predict/${home_team}/${away_team}`);
+    const response = await fetch(`http://127.0.0.1:8000/predict/${home_team}/${away_team}`);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -26,14 +46,21 @@ async function fetchData(home_team: string, away_team: string) {
 }
 
 function App() {
+  const [teams, setTeams] = useState<string[]>([])
   const [homeTeam, sethomeTeam] = useState("")
   const [awayTeam, setawayTeam] = useState("")
   const [result, setRestult] = useState<PredictionResult | null>(null)
+  useEffect(() => {
+    fetchTeams().then((result) => {
+      setTeams(result.teams)
+    })
+    console.log("teams", teams);
+  }, [])
 
   return (
     <>
       <div className="flex flex-row w-full justify-around  h-screen">
-        <TeamSearch type='home' setSelectedTeam={sethomeTeam} />
+        <TeamSearch type='home' teams={teams} setSelectedTeam={sethomeTeam} />
         <div className='flex flex-col justify-start items-center w-full'>
           <h1>Football Matchup Predictor</h1>
           <label>home: {homeTeam}</label>
@@ -66,7 +93,7 @@ function App() {
           }
         </div>
 
-        <TeamSearch type='away' setSelectedTeam={setawayTeam} />
+        <TeamSearch type='away' teams={teams} setSelectedTeam={setawayTeam} />
 
       </div>
     </>
