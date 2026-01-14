@@ -11,7 +11,8 @@ interface PredictionResult {
 
 async function fetchTeams() {
   try {
-    const response = await fetch(`http://127.0.0.1:8000/teams`);
+    const response = await fetch(`https://football-predictor-backend-6j8a.onrender.com/teams`);
+    // const response = await fetch(`http://127.0.0.1:8000/teams`);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
