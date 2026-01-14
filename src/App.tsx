@@ -30,8 +30,8 @@ async function fetchTeams() {
 
 async function fetchData(home_team: string, away_team: string) {
   try {
-    // const response = await fetch(`https://football-predictor-backend-6j8a.onrender.com/predict/${home_team}/${away_team}`);
-    const response = await fetch(`http://127.0.0.1:8000/predict/${home_team}/${away_team}`);
+    const response = await fetch(`https://football-predictor-backend-6j8a.onrender.com/predict/${home_team}/${away_team}`);
+    // const response = await fetch(`http://127.0.0.1:8000/predict/${home_team}/${away_team}`);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
