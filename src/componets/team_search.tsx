@@ -7,10 +7,10 @@ interface searchResult {
 }
 interface TeamSearchProps {
     type?: string,
+    setSelectedTeam: (team: string) => void
 }
 export default function TeamSearch(props: TeamSearchProps) {
     const [team, setTeam] = useState<string>("")
-    const [selectedTeam, setSelectedTeam] = useState<string>("")
     const [results, setResults] = useState<searchResult[]>([])
     const options = {
         includeScore: true
@@ -49,7 +49,8 @@ export default function TeamSearch(props: TeamSearchProps) {
                     {
                         results.map((result, index) => (
                             <li key={index} onClick={() => {
-                                setSelectedTeam(result.item)
+                                props.setSelectedTeam(result.item)
+                                setTeam(result.item)
                                 setResults([])
                             }}>
                                 {result.item}
@@ -59,7 +60,7 @@ export default function TeamSearch(props: TeamSearchProps) {
                 </ul>
             }
             <div>
-                Selected Team: {selectedTeam}
+                Selected Team: {team}
             </div>
         </div>
     )

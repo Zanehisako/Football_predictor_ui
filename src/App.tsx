@@ -33,13 +33,16 @@ function App() {
   return (
     <>
       <div className="flex flex-row w-full justify-around  h-screen">
-        <TeamSearch type='home' />
+        <TeamSearch type='home' setSelectedTeam={sethomeTeam} />
         <div className='flex flex-col justify-start items-center w-full'>
           <h1>Football Matchup Predictor</h1>
+          <label>home: {homeTeam}</label>
+          <label>away: {awayTeam}</label>
           <button onClick={async () => {
             const result = await fetchData(homeTeam, awayTeam)
             setRestult(result)
           }}>Submit</button>
+
           {
             result && <div>
               <div id="result">
@@ -63,7 +66,7 @@ function App() {
           }
         </div>
 
-        <TeamSearch type='away' />
+        <TeamSearch type='away' setSelectedTeam={setawayTeam} />
 
       </div>
     </>
